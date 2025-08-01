@@ -22,11 +22,21 @@ window.onload = () => {
   }, 2000);
 
   // ❤️ Kalp butonuna basınca sadece klp1.mp4 oynat
-  heartBtn.onclick = () => {
-    mainContent.style.display = 'none';
+ heartBtn.onclick = () => {
+  mainContent.style.display = 'none';
 
-    heart2.style.display = 'block';
-    heart2.currentTime = 0;
-    heart2.play();
-  };
+  heart2.style.display = 'block';
+  heart2.currentTime = 0;
+  
+  // Zorla oynamaya çalışıyoruz
+  const playPromise = heart2.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(() => {
+      console.log("Video oynuyor.");
+    }).catch(error => {
+      console.error("Video oynatılamadı:", error);
+    });
+  }
+};
 };

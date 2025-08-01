@@ -6,37 +6,42 @@ window.onload = () => {
   const heart1 = document.getElementById('heart1-video');
   const heart2 = document.getElementById('heart2-video');
 
-  // Açılış karanlık ekran
+  // Açılış karanlık ekran + intro video
   setTimeout(() => {
     blackScreen.style.opacity = 0;
     introVideo.style.display = 'block';
     introVideo.play();
 
-    // Video biterken tekrar karart
     introVideo.onended = () => {
       blackScreen.style.opacity = 1;
       setTimeout(() => {
         introVideo.style.display = 'none';
-        blackScreen.style.display = 'none';
+        blackScreen.style.display = 'none'; // ❗ Karartmayı kaldır
         mainContent.style.display = 'block';
       }, 2000);
     };
   }, 2000);
 
-  // Buton tıklanınca kalp1.mp4 oynat
+  // ❤️ Kalp butonuna basınca
   heartBtn.onclick = () => {
     mainContent.style.display = 'none';
+
     heart1.style.display = 'block';
+    heart1.currentTime = 0;
     heart1.play();
 
     heart1.onended = () => {
       heart1.style.display = 'none';
-      
-      // Ekran siyah-beyaz geçişi
+
+      // 🔁 Ekranı beyaza döndür
       document.body.style.transition = "background 2s";
       document.body.style.background = "white";
-      
+
+      // siyah ekran olmasın
+      blackScreen.style.display = 'none';
+
       heart2.style.display = 'block';
+      heart2.currentTime = 0;
       heart2.play();
     };
   };
